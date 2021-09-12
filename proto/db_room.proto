@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+message PlayerMatchInfo{
+    uint64 PlayerID = 1; // 玩家id
+    uint64 teamID = 2; // 玩家所属队伍ID
+    bool IsReady = 3; // 玩家是否准备
+    bool isMaster = 4; // 是否是房主
+};
+
+message DBRoom {
+    uint64 RoomID = 1; // 房间ID
+    string RoomName = 2; // 房间名称
+    int32 State = 3; // 房间状态，比如是否满员之类的，后面用int做枚举
+    uint64 Size = 4; // 已加入的房间总人数
+    uint64 Capacity = 5; // 最大容量
+    repeated PlayerMatchInfo Players = 6; // 加入房间的人员匹配相关信息
+};

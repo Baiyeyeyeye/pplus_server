@@ -1,0 +1,51 @@
+syntax = "proto3";
+package pb;
+import "db_room.proto";
+
+message CSGetRoomsReq
+{
+    uint64 playerID = 1;
+};
+
+message CSGetRoomsRes
+{
+    int32 Result = 1; // 状态码，目前 < 0 是失败，后面有待细分，为0时表示成功
+    repeated DBRoom RoomList = 2; // 目前的房间列表
+};
+
+message CSCreateRoomReq{
+    uint64 PlayerID = 1;
+};
+
+message CSCreateRoomRes{
+    int32 Result = 1; // 状态码，目前 < 0 是失败，后面有待细分，为0时表示成功
+    DBRoom NewRoomInfo = 2; // 开的新房间信息
+};
+
+message CSJoinRoomReq{
+    uint64 PlayerID = 1;
+    uint64 TargetRoomID = 2; // 想要加入的房间ID
+};
+
+message CSJoinRoomRes{
+    int32 result = 1; // 状态码，目前 < 0 是失败，后面有待细分，为0时表示成功
+};
+
+message CSStartGameReq{
+    uint64 RoomID = 1; // 要开局的房间ID
+};
+
+message CSStartGameRes{
+    int32 result = 1; // 状态码，目前 < 0 是失败，后面有待细分，为0时表示成功
+};
+
+message CSInvitePlayerReq{
+    uint64 orginPlayerID = 1; // 邀请人ID
+    uint64 destPlayerID = 2; // 被邀请人ID
+    uint64 RoomID = 3; // 要加入的房间ID
+};
+
+message CSInvitePlayerRes{
+    int32 result = 1; // 状态码，目前 < 0 是失败，后面有待细分，为0时表示成功
+    DBRoom RoomInfo = 2; // 邀请成功后的房间信息
+};
